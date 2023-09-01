@@ -1,0 +1,54 @@
+{% extends 'base/layout.html' %}
+{% block title %}
+{{ profile.user.username|upper }} : Wish
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <br>
+
+    <h1> {{ profile.user.username|title }} Profile Page</h1>
+    <hr>
+    <br><br>
+    <div class="btn-group border rounded-5">
+        <a type="button" class="btn btn-link p-0 m-0 clickable-icon text-primary border-0" href="{% url 'wishy:add_list' user %}" data-bs-target="#staticBackdrop">
+            <i class="fa-regular fa-square-plus fa-4x"></i>
+        </a>
+        
+      </div>
+      
+    <br><br><br>
+    {% if wish_list %}
+        <div class="list-group">
+            {% for wish in wish_list %}
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ wish.list_name }}</h5>
+                        <small class="text-body-secondary">{{ wish.created_at }}</small>
+                        <div>
+                            <form method="POST" action="{% url 'wishy:delete_list' username=username pk=wish.pk %}">
+                                {% csrf_token %}
+                                <button type="submit">
+                                    <i class="fa-regular fa-trash-can" style="color: #ff1414;"></i> 
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                </a>
+                <br>
+            {% endfor %}
+            <br><br>
+        </div>
+    {% else %}
+        <p>No wish lists found.</p>
+    {% endif %}
+{% else %}
+    <h1>Please Sign In</h1>
+{% endif %}
+
+
+
+
+{% endblock %}

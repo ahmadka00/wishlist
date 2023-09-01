@@ -1,0 +1,28 @@
+{% extends 'base/layout.html' %}
+{% block title %}
+{{ profile.user.username|upper}} : Add List
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <br>
+    <h1> Add List Name</h1>
+    <hr>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.list_name }}
+        </div>
+        <br><br>
+        <button class="btn btn-primary" type="submit">Add List</button>
+    </form>
+    <br><br><br>
+    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover">
+
+{% else %}
+    <h1>Please Sign In</h1>
+{% endif %}
+
+{% endblock %}
