@@ -1,0 +1,72 @@
+{% extends 'base/layout.html' %}
+{% block title %}
+Add List
+{% endblock %}
+
+{% block content %}
+<div class="container text-center col-md-6 offset-md-3">
+    <br><br>
+    {% if user.is_authenticated %}
+        {% if wish_lists %}
+            <div class="list-group shadow p-3" style="background-color: rgb(255, 255, 255);">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div class="modal-body p-5 pt-0">
+                            <form  method="POST" action="{% url 'wishy:add_wish' username=request.user.username %}"  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <br>
+                                <select class="form-select" id="id_wish_list" name="wish_list">
+                                    <option selected>Select Wish List To add wish for</option>
+                                    
+                                    {% for wish_list in wish_lists %}
+                                    <option value="{{ wish_list.pk }}">{{ wish_list.list_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <br><br>
+                                <div class="form-floating mb-3">
+                                    {{ form.wish_name }}
+                                    <label for="{{ form.wish_name.id_for_label }}">Wish Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{ form.description }}
+                                    <label for="{{ form.description.id_for_label }}">Description of the Wish</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{ form.link }}
+                                    <label for="{{ form.link.id_for_label }}">Link</label>
+                                </div>
+                                <br><br>
+                                <div class="form-floating mb-3">
+                                    {{ image.as_p }}
+                                </div>
+                                
+                                <br><br><br><br> 
+                                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Add Wish</button>
+                            </form>
+                            <br> 
+                            
+                        </div>
+                    </div>
+                </a>    
+            </div>
+            <br>
+        {% else %}
+            <h1> Please Add List First</h1>
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h4 class="text-center">Add New List</h4>
+                        <div class="btn-group d-flex justify-content-center align-items-center mt-2">
+                            <a type="button" class="btn btn-link p-0 m-0 clickable-icon text-primary border-0" href="{% url 'wishy:add_list' user %}" data-bs-target="#staticBackdrop">
+                                <i class="fa-regular fa-square-plus fa-4x"></i>
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <h1>Please Sign In</h1>
+    {% endif %}
+</div>
+{% endblock %}

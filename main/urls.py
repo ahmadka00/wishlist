@@ -6,7 +6,8 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('@<str:username>/', views.UserProfileView.as_view(), name='user_profile'),
     path('people/', views.people, name='people'),
-     
-    # path('create_wish_list/', views.CreateWishListView.as_view()),    
+    path('people/@<str:username>/', views.friend_page, name='friend')
+        
 ]

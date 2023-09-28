@@ -6,22 +6,60 @@ Friends
 {% block content %}
 <br><br>
     {% if persons %}
-        {% for person in persons %}
-            <div class="card mb-3" style="max-width: 540px; max-height: 100px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ person.image_field.url }}" class="img-fluid rounded-circle" alt="profile_picture" style="width: 60px; height: 60px;">
-                    </div>
-                    
-                <div class="col-md-6">
-                    <div class="card-body">
-                    <h5 class="card-title">{{ person.user.username }}</h5>
-                    
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                    </div>
+    <div class="container text-center col-md-6 offset-md-3">
+        <div class="list-group border rounded-1" style="max-width: 400px;">
+            
+                <div class="list-group-item list-group-item-action">
+                    <br>
+                    {% for person in persons %}
+                        <a class="text-black link-offset-2 link-underline link-underline-opacity-0" href="{% url 'main:friend' person.user.username %}">
+                            <div class="border align-items-center w-100">
+                                <img src="{{ person.image_field.url }}" class="img-fluid rounded-circle" alt="profile_picture" style="width: 60px; height: 60px;">
+                                <h5 class="card-title mx-auto">{{ person.user.username | title }}</h5>
+                                
+                            </div>
+                        </a>
+                        <br>
+                    {% endfor %}
+
                 </div>
-                </div>
+            </a>
+        </div>
+        <br>
+        {% if persons %}
+        <div class="card">
+            <div class="card-body">
+                <strong>Followers:</strong><br>
+                {% for person in persons %}
+                    {% if person.user != request.user %}
+                        {% if profile in person.follows.all %}
+                            <a href="{% url 'main:friend' person.user.username %}">
+                                @{{ person.user.username }}
+                            </a>
+                            <br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
             </div>
-        {% endfor %}
+            <div class="card-body">
+                <!-- need to fix follwing and followers name  -->
+                <strong>Following:</strong><br>
+                {% for person in persons %}
+                    {% if person.user != request.user %}
+                        {% if profile in person.followed_by.all %}
+                            <a href="{% url 'main:friend' person.user.username %}">
+                                @{{ person.user.username }}
+                            </a>
+                            <br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <br><br><br><br>
     {% endif %}
+    
+
+    {% endif %}
+    </div>
 {% endblock %}

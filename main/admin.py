@@ -23,8 +23,25 @@ admin.site.unregister(User)
 # Register User and Profile
 admin.site.register(User, UserAdmin)
 
-# Register Wishlist
+
 admin.site.register(Wishlist)
 
-# Register Wish
+
 admin.site.register(Wish)
+
+
+# class PortfolioAdmin(admin.ModelAdmin):
+#     prepopulated_fields = {'list_slug': ('list_name',), 'wish_slug' : ('wish_name',),}
+
+
+# # Register Wishlist
+# @admin.register(Wishlist)
+# class WishListAdmin(admin.ModelAdmin):
+#     list_display = ['list_name', 'list_slug']
+#     prepopulated_fields = {'list_slug': ('list_name',)}
+
+# # Register Wish
+# @admin.register(Wish)
+# class WishAdmin(admin.ModelAdmin):
+#     list_display = ['wish_name', 'wish_slug']
+#     prepopulated_fields = {'wish_slug': ('wish_name',)}

@@ -4,5 +4,13 @@ Wishy
 {% endblock %}
 
 {% block content %}
-<h1>Hello World!</h1>
+<br><br>
+<div class="container col-md-12 offset-md-1 px-2 ">
+    <h1 class="text-center">Hello World!</h1>
+    <br>
+    <div class="container border " style="background-color: rgb(170, 216, 251); font-size: medium;">
+    <div >
+        {{ readme_html|safe }}
+    </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base/layout.html' %}
+{% block title %}
+Wish
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center col-md-6 offset-md-3">
+    <div class="px-6 pt-3 my-5 text-center ">
+        <h6 class="display-7 fw-bold text-body-emphasis danger" id="projects-title">{{ wish.list_name|upper }}</h1>
+        <h5 class="display-6 fw-bold text-body-emphasis" id="projects-title">{{ wish.wish_name|upper }}</h4>
+        <div class="container my-1">
+            <div class="row p-1 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg mx-auto">
+                <div class="overflow-hidden">
+                    {% if wish.image %}
+                        <div class="d-flex justify-content-center mb-2 px-1">
+                        <img src="{{ wish.image.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="200" loading="lazy">
+                        </div>
+                    {% else %}
+                        <small> No image available</small>
+                    {% endif %}
+                    
+                </div>
+                
+                
+                <div class="col-lg-6 mx-auto">
+                    {% if wish.description %}
+                        <p class="lead mb-4">{{ wish.description}}</p>
+                    {% else %}
+                        <small>No description available</small> <br>
+                    {% endif %}
+                    {% if wish.link %}
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" style="display: grid; gap: 0.5rem;">
+                            <a href="{{wish.link }}"><button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" style="width: 200px; color: #fff; 
+                            background-color:#0d6efd; border-color: #0d6efd; text-decoration: none; font-size: 1.25rem; line-height: 1.5;
+                            padding: 0.75rem 1.5rem; border-radius: 0.3rem;">Visit Wish Site</button></a>
+                        </div>
+                    
+                    {% else %}
+                        <small>No link available</small>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+
+
+
+{% endblock %}

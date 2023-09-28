@@ -1,0 +1,53 @@
+{% extends 'base/layout.html' %}
+{% block title %}
+Update Wish
+{% endblock %}
+
+{% block content %}
+<div class="container text-center col-md-6 offset-md-3">
+    {% if user.is_authenticated %}
+        <br>
+        <h1> Update Wish Name</h1>
+        <hr>
+        <br>
+        <div class="list-group shadow p-3" style="background-color: rgb(255, 255, 255);">
+            <div class="d-flex w-100 justify-content-between">
+                <div class="modal-body p-5 pt-0">
+                    <form  method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <br>
+                        <div class="form-floating mb-3">
+                            {{ form.wish_name }}
+                            <label for="{{ form.wish_name.id_for_label }}">Wish Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.description }}
+                            <label for="{{ form.description.id_for_label }}">Description of the Wish</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{ form.link }}
+                            <label for="{{ form.link.id_for_label }}">Link</label>
+                        </div>
+                        <br><br>
+
+                        <img src="{{ wish.image.url }}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="400" height="200" loading="lazy">
+                        <div class="form-floating mb-3">
+                            {{ image.as_p }}
+                        </div>
+                        
+                        <br>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Update Wish</button>
+                    </form>
+
+                    
+                    <br> 
+                    
+                </div>
+            </div>
+        </a>    
+    </div>
+    {% else %}
+        <h1>Please Sign In</h1>
+    {% endif %}
+</div>
+{% endblock %}
