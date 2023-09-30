@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 import markdown
+from ckeditor.fields import RichTextField
 
 
 def home(request):

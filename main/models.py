@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-
+from ckeditor.fields import RichTextField
 
 
 
@@ -35,7 +35,7 @@ class Wish(models.Model):
     is_active = models.BooleanField(default=True)
     link= models.URLField(max_length=1000,blank=True)
     image = models.ImageField(upload_to='images/wishes', blank=True, null=True)
-
+    body = RichTextField(blank=True, null=True)
     def __str__(self):
         return(
             f"{self.wish_name}"
