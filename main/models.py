@@ -17,7 +17,7 @@ class Profile(models.Model):
     
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    list_name = models.CharField(max_length=200, unique=True)
+    list_name = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-$s*en)=uptqxvfui$x&-o8dis*xy777c(%4e#@32l3b6g)n76g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wishlist.a-kaddo.com', '51.20.72.160']
+ALLOWED_HOSTS = ['wishlist.a-kaddo.com', '51.20.72.160', '127.0.0.1']
 
 
 # Application definition
@@ -140,6 +141,11 @@ EMAIL_HOST_PASSWORD = 'juvfjvzzkhsdxxdc'
 
 
 
+#Remove from here
+
+from some_secrets import AWS_ID, AWS_KEY
+AWS_ACCESS_KEY_ID = AWS_ID
+AWS_SECRET_ACCESS_KEY = AWS_KEY
 AWS_DEFAULT_REGION = 'eu-west-3'
 AWS_STORAGE_BUCKET_NAME = "wishlist-static"
 
@@ -148,3 +154,5 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# To Here
