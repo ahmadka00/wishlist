@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from ckeditor.fields import RichTextField
 
 
 
@@ -11,7 +10,7 @@ from ckeditor.fields import RichTextField
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     follows = models.ManyToManyField('self', related_name='followed_by', symmetrical=False, blank=True)
-    image_field = models.ImageField(default='images/profile_default.png', upload_to='images/users_profile/')
+    image_field = models.ImageField(default='wishlist/images/profile_default.png', upload_to='wishlist/images/users_profile/')
     def __str__(self):
         return self.user.username
     
@@ -34,8 +33,7 @@ class Wish(models.Model):
     description = models.CharField(max_length=200, blank=True )
     is_active = models.BooleanField(default=True)
     link= models.URLField(max_length=1000,blank=True)
-    image = models.ImageField(upload_to='images/wishes', blank=True, null=True)
-    body = RichTextField(blank=True, null=True)
+    image = models.ImageField(upload_to='wishlist/images/wishes', blank=True, null=True)
     def __str__(self):
         return(
             f"{self.wish_name}"
