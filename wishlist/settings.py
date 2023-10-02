@@ -144,9 +144,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 #Remove from here
 
-from some_secrets import AWS_ID, AWS_KEY
-AWS_ACCESS_KEY_ID = AWS_ID
-AWS_SECRET_ACCESS_KEY = AWS_KEY
 AWS_DEFAULT_REGION = 'eu-west-3'
 AWS_STORAGE_BUCKET_NAME = "wishlist-static"
 

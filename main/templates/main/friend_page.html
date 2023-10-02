@@ -44,7 +44,7 @@ Friends
     <!-- Right Section: Wish Lists -->
     <div class="col-md-8">
         <br>
-    {% if profile in user.profile.follows.all %}
+    {% if is_following %}
       {% if wish_lists %}
       <div class="list-group">
         {% for list in wish_lists %}

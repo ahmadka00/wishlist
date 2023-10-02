@@ -71,14 +71,23 @@ def friend_page(request, username):
             # Save the profile
             current_user_profile.save() 
 
-        followed_user = request.user.profile.follows.all().values_list('user', flat=True)
-        wish_lists = Wishlist.objects.filter(user__in=followed_user)
-        wishes = Wish.objects.filter(list_name__in=wish_lists)
-        context = {'profile': profile,
-                    'wish_lists': wish_lists, 
-                    'wishes':wishes,
-                    'username': profile.user.username,
-                    }
+        is_following = profile.user.profile.followed_by.filter(user=request.user).exists()
+        if is_following:
+            # If the current user is following "Mary," retrieve her wishlists and wishes
+            wish_lists = Wishlist.objects.filter(user=profile.user)
+            wishes = Wish.objects.filter(list_name__in=wish_lists)
+        else:
+            # If the current user is not following "Mary," set wish_lists and wishes to empty lists
+            wish_lists = []
+            wishes = []
+        
+        context = {
+            'profile': profile,
+            'wish_lists': wish_lists, 
+            'wishes': wishes,
+            'username': profile.user.username,
+            'is_following': is_following,
+        }
         return render(request, 'main/friend_page.html', context)
 
 
