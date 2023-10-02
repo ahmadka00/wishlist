@@ -1,0 +1,2 @@
+Please rename 1settings.py to settings.py (remove 1) in wishlist folder
+
